@@ -28,8 +28,11 @@ class ApplicationSpec extends Specification {
       val bundlesRequest = route(FakeRequest(GET, "/bundles")).get
       status(bundlesRequest) must equalTo(OK)
       contentType(bundlesRequest) must beSome.which( _ == "application/json")
-      contentAsJson(bundlesRequest).\("data")
+      val jsonObject = contentAsJson(bundlesRequest)
+      jsonObject.\("total_count") must not be None
+      jsonObject.\("total_count") must beEqualTo(1000)
+      jsonObject.\("data") must not be None
+      jsonObject.\\("data").size must beEqualTo(1000)
     }
-
   }
 }
