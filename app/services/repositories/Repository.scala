@@ -5,7 +5,7 @@ import utils.CustomError
 /**
  * Created by diego on 1/31/14.
  */
-trait Repository { self: Persistent =>
+trait Repository[E <: Persistent] {
   def getById(id: Long) : Option[Persistent]
   def getByName(name: String) : Option[Persistent]
   def getAll : List[Persistent]
