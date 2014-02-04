@@ -31,6 +31,8 @@ class ApplicationSpec extends Specification {
         element = Json.obj("id" -> i.toDouble, "description" -> "case" , "cost" -> 10)
       } yield(element))
 
+      println(jsonObjbect.toString)
+
       val request = route(FakeRequest(POST,"/bundles").withJsonBody(jsonObjbect)).get
       status(request) must equalTo(OK)
     }
