@@ -10,5 +10,8 @@ object Application extends Controller {
   }
 
   def getBundles = Action { Ok }
+  def createBundles = Action { implicit request =>
+    Ok
+  }
 
 }

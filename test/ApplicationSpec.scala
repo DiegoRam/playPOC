@@ -4,6 +4,7 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
+import play.api.libs.json._
 
 /**
  * Add your spec here.
@@ -23,6 +24,17 @@ class ApplicationSpec extends Specification {
       contentType(home) must beSome.which(_ == "text/html")
       contentAsString(home) must contain ("Your new application is ready.")
     }
+
+    "must process 10 json element on /Bundles " in new WithApplication {
+      val jsonObjbect = Json.arr(for {
+        i <- 1 to 10
+        element = Json.obj("id" -> i.toDouble, "description" -> "case" , "cost" -> 10)
+      } yield(element))
+
+      val request = route(FakeRequest(POST,"/bundles").withJsonBody(jsonObjbect)).get
+      status(request) must equalTo(OK)
+    }
+
 
     "render a json object with a thousand elements" in new WithApplication{
       val bundlesRequest = route(FakeRequest(GET, "/bundles")).get
