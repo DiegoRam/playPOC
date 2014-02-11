@@ -31,8 +31,6 @@ class ApplicationSpec extends Specification {
         element = Json.obj("id" -> i.toDouble, "description" -> "case" , "cost" -> 10)
       } yield(element))
 
-      println(jsonObjbect.toString)
-
       val request = route(FakeRequest(POST,"/bundles").withJsonBody(jsonObjbect)).get
       status(request) must equalTo(OK)
     }
@@ -43,10 +41,7 @@ class ApplicationSpec extends Specification {
       status(bundlesRequest) must equalTo(OK)
       contentType(bundlesRequest) must beSome.which( _ == "application/json")
       val jsonObject = contentAsJson(bundlesRequest)
-      jsonObject.\("total_count") must not be None
-      jsonObject.\("total_count") must beEqualTo(1000)
-      jsonObject.\("data") must not be None
-      jsonObject.\\("data").size must beEqualTo(1000)
+      jsonObject.\\("").size must beEqualTo(10)
     }
   }
 }
