@@ -25,7 +25,7 @@ object Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
   def getBundles = Action { implicit request =>
-    Ok(Json.toJson(defaultBundle.getAll.map{bundle => (bundle.id.toString, bundle.description)} toList))
+    Ok(Json.toJson(Json.obj("data" -> Json.arr(Json.obj("id" -> 1),Json.obj("id" )))))
   }
 
 
