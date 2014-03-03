@@ -36,9 +36,9 @@ object Application extends Controller {
 
   def createBundles = Action(parse.json) {
     implicit request =>
-      request.body.validate[(List[List[RawBundle]])].map {
-        case head :: tail => {
-          head foreach (bundle => Bundle(bundle._1, bundle._2, bundle._3).save)
+      request.body.validate[List[RawBundle]].map {
+        case head::tail => {
+          head :: tail foreach (bundle => Bundle(bundle._1, bundle._2, bundle._3).save)
           Ok(Json.obj("status" -> "ok"))
         }
       }.recoverTotal {
