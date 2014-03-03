@@ -7,7 +7,7 @@ import utils.CustomError
  * Created by diego on 1/31/14.
  */
 object MemoryStorage {
-  var memoryListBundles = Vector[Bundle](Bundle(0L, "first article", 2))
+  var memoryListBundles = Vector[Bundle](Bundle(0L, "first article", 2),Bundle(1L, "second article", 34.56))
 
   implicit class BundleMemory(bundle: Bundle) extends Repository[Bundle]{
 
